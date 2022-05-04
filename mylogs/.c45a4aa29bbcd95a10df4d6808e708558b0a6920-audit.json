@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "/home/ihsank/Documents/GitHub/sechabeng/mylogs/.c45a4aa29bbcd95a10df4d6808e708558b0a6920-audit.json",
+    "files": [
+        {
+            "date": 1651585861300,
+            "name": "/home/ihsank/Documents/GitHub/sechabeng/mylogs/2022-05-03-debug.log",
+            "hash": "e4d886786c058a5791c183ff28725b21"
+        }
+    ],
+    "hashType": "md5"
+}

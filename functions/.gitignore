@@ -1,0 +1,6 @@
+node_modules/
+facebook/*
+twitter/*
+instagram/*
+userDataDir/*
+logs

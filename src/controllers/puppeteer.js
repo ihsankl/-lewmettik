@@ -3,8 +3,10 @@ import HttpStatus from 'http-status-codes';
 import { getTwitImg, postToFacebook, postToInstagram } from '../services/puppeteerServices';
 import { Cluster } from "puppeteer-cluster";
 import path from 'path';
+import fs from 'fs';
 
-const userDir = path.resolve('./userDataDir')
+const userDir = path.resolve('./userDataDir');
+const twitDir = path.resolve('./twitter');
 
 /**
  * Get all users.
@@ -33,6 +35,9 @@ export const fromTwitter = async (req, res, next) => {
         await postToFacebook(page, process.env.FB_USER, process.env.FB_PASS, img);
 
         await postToInstagram(page, process.env.IG_USER, process.env.IG_PASS, img, data.caption);
+
+        // delete image after successful post
+        await fs.unlinkSync(twitDir + '/' + img);
 
     });
 

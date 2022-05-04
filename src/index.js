@@ -3,11 +3,11 @@ import './db';
 
 import fs from 'fs';
 import cors from 'cors';
-import path from 'path';
+// import path from 'path';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import express from 'express';
-import favicon from 'serve-favicon';
+// import favicon from 'serve-favicon';
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import * as Sentry from '@sentry/node';
@@ -16,6 +16,7 @@ import routes from './routes';
 import json from './middlewares/json';
 import logger, { logStream } from './utils/logger';
 import * as errorHandler from './middlewares/errorHandler';
+const functions = require('firebase-functions');
 
 // Initialize Sentry
 // https://docs.sentry.io/platforms/node/express/
@@ -38,7 +39,7 @@ app.locals.version = process.env.APP_VERSION;
 // This request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
 
-app.use(favicon(path.join(__dirname, '/../public', 'favicon.ico')));
+// app.use(favicon(path.join(__dirname, '/../public', 'favicon.ico')));
 app.use(cors());
 app.use(helmet());
 app.use(compression());
@@ -99,4 +100,7 @@ process.on('uncaughtException', (err) => {
   }
 });
 
-export default app;
+exports.app = functions.runWith({
+  memory: '2GB',
+  timeoutSeconds: 540,
+}).https.onRequest(app); 
