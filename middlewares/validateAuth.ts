@@ -1,9 +1,12 @@
 /* eslint-disable consistent-return */
-const jwt = require('jsonwebtoken');
+import { NextFunction, Request, Response } from "express";
+import jwt, { JwtPayload } from "jsonwebtoken";
+import { generalConfig as config } from "../src/config";
+interface RequestWithUser extends Request {
+  user: string | JwtPayload | undefined;
+}
 
-const config = require('../config');
-
-const checkIfAuthenticated = async (req, res, next) => {
+export const checkIfAuthenticated = async (req: RequestWithUser, res: Response, next: NextFunction) => {
   const token =
     req.headers.authorization && req.headers.authorization.split(' ')[1];
 
@@ -20,5 +23,3 @@ const checkIfAuthenticated = async (req, res, next) => {
     next();
   });
 };
-
-module.exports = { checkIfAuthenticated };

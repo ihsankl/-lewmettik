@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
-const config = require('../config');
+// const config = require('../config');
+import mongoose from 'mongoose';
+import { generalConfig as config } from '../src/config';
 
-const dbUrl = config.dbUrlMongoDB;
+const dbUrl = config.dbUrlMongoDB as string;
 
 mongoose.connect(
   dbUrl,
@@ -13,4 +15,4 @@ mongoose.connect(
   }
 );
 
-module.exports = mongoose;
+export default mongoose;
