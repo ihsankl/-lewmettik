@@ -9,12 +9,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(expressip().getIpInfoMiddleware);
 
-app.use((req, res, next) => {
+app.use((_, res, next) => {
   // Website you wish to allow to connect
   res.setHeader('Access-Control-Allow-Origin', '*');
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET');
+  res.setHeader(
+    'Access-Control-Allow-Methods',
+    'GET, POST, OPTIONS, PUT, PATCH, DELETE'
+  );
 
   // Request headers you wish to allow
   res.setHeader(

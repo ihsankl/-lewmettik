@@ -2,10 +2,17 @@ const Bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
 const config = require('../../../config');
+const schemes = require('../models/mongoose');
 
 module.exports.signUp = async (res, parameters) => {
-  const { password, passwordConfirmation, email, username, name, lastName } =
-    parameters;
+  const {
+    password,
+    passwordConfirmation,
+    email,
+    username,
+    name,
+    lastName,
+  } = parameters;
 
   if (password === passwordConfirmation) {
     const newUser = schemes.User({
